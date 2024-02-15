@@ -58,6 +58,7 @@ public class Account extends FileClass {
         }
     }	
 	//@Override
+    //insert new account into the text file.
 	public String insertData() {
 		
 		String message = "start";
@@ -67,7 +68,6 @@ public class Account extends FileClass {
         //check if the email exists
         for(String[] account : accountList) {
         	if(account[0].equals(user_email)) {
-        		System.out.println(account[0]);
         		message = "Account with this email is already created. Please try to create account with another email.";
         		return message;
         	}
@@ -97,6 +97,106 @@ public class Account extends FileClass {
 		return message;
 			
 		}
+	
+	//login authentication.
+	public String authenticateLogin(String providedEmail, String providedPassword) {
+		List<String[]> accountList = loadData();
+		String message = null;
+		for(String[] account : accountList) {
+			//check if email exists
+			if (providedEmail.equals(account[0])) {
+			    // password correct and activated
+			    if (providedPassword.equals(account[1]) && !account[4].equals("Unassigned")) {
+			        // set the UID
+			        UID = account[3];
+			        message = "Successfully login";
+			    }
+			    // password incorrect
+			    else if (!providedPassword.equals(account[1])) {
+			        message = "Incorrect password";
+			    }
+			    // password correct but account not activated
+			    else if (providedPassword.equals(account[1]) && account[4].equals("Unassigned")) {
+			        message = "Account is not activated yet. Please contact admin to activate your account.";
+			    }
+			    return message;
+			}
+
+
+		}
+		message = "Account with this email is not exists";
+		return message;
+	}
+	
+	//view personal profile
+	public String[] viewProfile() {
+		List<String[]> accountList = loadData();
+		for(String[] account : accountList) {
+			if (UID.equals(account[3])) {
+				return account;
+			}
+		}
+		return null;
+	
+	}
+	
+	//edit personal profile
+	public String editProfile(String[] updatedProfile) {
+		List<String[]> accountList = loadData();
+		for (String[] account: accountList) {
+			if(account[3].equals(UID)) {
+	            for (int i = 0; i < account.length; i++) {
+	                account[i] = updatedProfile[i];
+	            }
+	            break;
+	         }
+		}
+
+		return overwriteData(accountList);
+	}
+	
+	public void deleteAccount(){
+		List<String[]> accountList = loadData();
+
+	    for(String[] account : accountList){
+	        if (account[3].equals(UID)){
+	            for(int i = 0; i < account.length; i++){
+	            	account[i] = "";
+	                }
+	            }
+	        }    
+	    overwriteData(accountList);
+	    
+	        
+
+	}	
+	
+	//overwrite the entire text file.
+	public String overwriteData(List<String[]> updatedData) {
+		String message;
+		try {
+			FileWriter fw = new FileWriter(filename);
+			PrintWriter outputFile = new PrintWriter(fw);
+			for (String[] data: updatedData) {
+				
+                if (!"".equals(data[0])){
+
+					for(int i = 0; i < 5;i++) {
+						outputFile.println(data[i]);
+					}
+                }
+			}
+			outputFile.close();
+
+			message = "Edited successfully.";
+			return message;
+		}catch (IOException e) {
+			message = "Unable to open file.";
+			return message;
+		}
+	}
+	
+	
 	}
 
 
