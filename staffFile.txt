@@ -2,9 +2,24 @@ test123456@gmail.com
 test
 Jia Ming
 dacb1ec0-92dd-47b8-9c4b-fb65bd50404f
+Admin
+admin
+admin
+Admin User
+cd4cddd1-4b7a-43a9-8682-e2dc95d8e551
+Admin
+officer
+officer
+Officer User
+54ae35c7-0d42-42c5-b128-62cea775f210
 Officer
-kali
-kalipass
-kaliname
-3b256ab8-df0c-4af4-b790-c0cf02f29f65
-Officer
+sale
+sale
+Salesperson User
+e879e184-6dbb-4335-b29a-f8785192d638
+Salesperson
+test
+test
+null
+668bb548-582e-4979-84df-66e5be240bb9
+Unassigned

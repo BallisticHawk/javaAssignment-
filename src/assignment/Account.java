@@ -30,7 +30,9 @@ public class Account extends FileClass {
 		this.user_email = user_email;
 		role = "Unassigned";
 	}
-
+	public Account() {
+		super("staffFile.txt");
+	}
 	
     public List<String[]> loadData(){
         try{
@@ -99,9 +101,12 @@ public class Account extends FileClass {
 		}
 	
 	//login authentication.
-	public String authenticateLogin(String providedEmail, String providedPassword) {
+	public String[] authenticateLogin(String providedEmail, String providedPassword) {
 		List<String[]> accountList = loadData();
-		String message = null;
+		String[] array = new String[3];
+		//array index 1 is to store login status, index 2 is to store the message shown, index 3 is to store the user role
+		
+		
 		for(String[] account : accountList) {
 			//check if email exists
 			if (providedEmail.equals(account[0])) {
@@ -109,23 +114,32 @@ public class Account extends FileClass {
 			    if (providedPassword.equals(account[1]) && !account[4].equals("Unassigned")) {
 			        // set the UID
 			        UID = account[3];
-			        message = "Successfully login";
+			        array[0] = "success";
+			        array[1] = "Successfully login";
+			        array[2] = account[4];
+
 			    }
 			    // password incorrect
 			    else if (!providedPassword.equals(account[1])) {
-			        message = "Incorrect password";
+			    	array[0] = "fail";
+			        array[1] = "Incorrect password";
+
+
 			    }
 			    // password correct but account not activated
 			    else if (providedPassword.equals(account[1]) && account[4].equals("Unassigned")) {
-			        message = "Account is not activated yet. Please contact admin to activate your account.";
+			    	array[0] = "fail";
+			        array[1] = "Account is not activated yet. Please contact admin to activate your account.";
+
 			    }
-			    return message;
+			    return array;
 			}
 
 
 		}
-		message = "Account with this email is not exists";
-		return message;
+	    array[0] = "fail";
+	    array[1] = "Account with this email is not exists";
+		return array;
 	}
 	
 	//view personal profile
