@@ -9,7 +9,11 @@ public class Admin extends Account{
 		this.role = role;		
 	}
 	
-	//delete worker account
+	public Admin() {
+		
+	}
+	
+	//delete worker account (overloading)
 	public void deleteAccount(String ID){
 		List<String[]> accountList = loadData();
 
@@ -23,8 +27,8 @@ public class Admin extends Account{
 	    overwriteData(accountList);
 	}		
 
-	
-	//edit worker account
+
+	//edit worker account (overloading)
 	public String editProfile(String[] updatedProfile,String ID) {
 		List<String[]> accountList = loadData();
 		for (String[] account: accountList) {
@@ -38,4 +42,18 @@ public class Admin extends Account{
 
 		return overwriteData(accountList);
 	}
+	
+	//view particular staff's profile
+	public String[] viewProfile(String ID) {
+		List<String[]> accountList = loadData();
+		for(String[] account : accountList) {
+			if (ID.equals(account[3])) {
+				return account;
+			}
+		}
+		return null;
+	
+	}
+	
+
 }

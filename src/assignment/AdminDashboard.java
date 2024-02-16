@@ -73,6 +73,17 @@ public class AdminDashboard extends JFrame {
 		});
 		btnManageProfile.setBounds(78, 67, 195, 64);
 		contentPane.add(btnManageProfile);
+		
+		JButton btnManageWorkerProfile = new JButton("Manage Worker Profile");
+		btnManageWorkerProfile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ManageWorker A = new ManageWorker();
+				A.setVisible(true);
+				dispose();
+			}
+		});
+		btnManageWorkerProfile.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnManageWorkerProfile.setBounds(78, 150, 195, 64);
+		contentPane.add(btnManageWorkerProfile);
 	}
-
 }

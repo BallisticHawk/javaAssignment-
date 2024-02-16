@@ -59,7 +59,7 @@ public class Account extends FileClass {
             return null;
         }
     }	
-	//@Override
+	@Override
     //insert new account into the text file.
 	public String insertData() {
 		
@@ -99,7 +99,30 @@ public class Account extends FileClass {
 		return message;
 			
 		}
-	
+	//overwrite the entire text file.
+	public String overwriteData(List<String[]> updatedData) {
+		String message;
+		try {
+			FileWriter fw = new FileWriter(filename);
+			PrintWriter outputFile = new PrintWriter(fw);
+			for (String[] data: updatedData) {
+				
+                if (!"".equals(data[0])){
+
+					for(int i = 0; i < 5;i++) {
+						outputFile.println(data[i]);
+					}
+                }
+			}
+			outputFile.close();
+
+			message = "Edited successfully.";
+			return message;
+		}catch (IOException e) {
+			message = "Unable to open file.";
+			return message;
+		}
+	}
 	//login authentication.
 	public String[] authenticateLogin(String providedEmail, String providedPassword) {
 		List<String[]> accountList = loadData();
@@ -185,30 +208,7 @@ public class Account extends FileClass {
 
 	}	
 	
-	//overwrite the entire text file.
-	public String overwriteData(List<String[]> updatedData) {
-		String message;
-		try {
-			FileWriter fw = new FileWriter(filename);
-			PrintWriter outputFile = new PrintWriter(fw);
-			for (String[] data: updatedData) {
-				
-                if (!"".equals(data[0])){
 
-					for(int i = 0; i < 5;i++) {
-						outputFile.println(data[i]);
-					}
-                }
-			}
-			outputFile.close();
-
-			message = "Edited successfully.";
-			return message;
-		}catch (IOException e) {
-			message = "Unable to open file.";
-			return message;
-		}
-	}
 	
 	
 	}
