@@ -6,15 +6,53 @@ import java.util.List;
 
 public class Officer extends Account implements ManageSales{
 
-	@Override
-	public String modifySales() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<String[]> modifySales(List<String[]> salesList, String OrderID,String status) {
+		
+		//for loop on the sale list to find the selected order ID and change the sale status.
+		for (String[] sale: salesList) {
+			if(sale[0].equals(OrderID)) {
+				sale[8] = status;
+	            break;
+	         }
+		}		
+		
+		
+		return salesList;
 	}
+	
+	public List<String[]> modifySales(List<String[]> salesList, String OrderID,String saleStatus, String productStatus) {
+		
+		//for loop on the sale list to find the selected order ID. Besides make sure that the orderID is approval only able to allow make changes of product status.
+		for (String[] sale: salesList) {
+			if(sale[0].equals(OrderID) && saleStatus.equals("approval")) {
+				sale[9] = productStatus;
+	            break;
+	         }
+		}		
+		
+		
+		return salesList;
+	}	
 
 	@Override
-	public String searchSales() {
-		// TODO Auto-generated method stub
+	//find particular order from the saleslist
+	public String[] searchSales(List<String[]> salesList,String ID) {
+		
+		List<String[]> list = viewSales(salesList);
+		
+		
+		for(String[] record : list) {
+			
+			//check if Order ID match with the input.
+			if(record[0].equals(ID)) {
+
+				return record;
+			}
+		}
+		
+		
+		
+		
 		return null;
 	}
 
@@ -41,5 +79,6 @@ public class Officer extends Account implements ManageSales{
 		
 		return info;
 	}
+	
 
 }

@@ -84,7 +84,7 @@ public class Sales extends FileClass{
 
             while (inputFile.hasNext()){
              String[] saleDetail = new String[13];
-             for(int i = 0; i < 14; i++){
+             for(int i = 0; i < 13; i++){
             	 saleDetail[i] = inputFile.nextLine();
 
              }
@@ -113,7 +113,7 @@ public class Sales extends FileClass{
 				
                 if (!"".equals(data[0])){
 
-					for(int i = 0; i < 11;i++) {
+					for(int i = 0; i < 13;i++) {
 						outputFile.println(data[i]);
 					}
                 }
