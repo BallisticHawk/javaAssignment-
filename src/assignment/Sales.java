@@ -80,7 +80,9 @@ public class Sales extends FileClass{
             File file = new File(filename);
             Scanner inputFile = new Scanner(file);
             
-            //the text file have 11 column (order id, item id, item name, price, quantity, day, month, year, salesperson id, product status and sale status
+            //the text file have 13 column (order id, item name, salesperson ID, price, quantity, day, month, year, saler status 
+            //productstatus, customer name, customer address, customer contact
+
 
             while (inputFile.hasNext()){
              String[] saleDetail = new String[13];
