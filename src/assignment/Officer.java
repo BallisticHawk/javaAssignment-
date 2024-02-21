@@ -55,6 +55,19 @@ public class Officer extends Account implements ManageSales{
 		
 		return null;
 	}
+	public String[] generateInvoice(List<String[]> salesList,String ID) {
+		String[] invoiceDetails = searchSales(salesList,ID);
+		
+		//calculate total price by using price * quantity
+        double price = Integer.parseInt(invoiceDetails[3]);
+        double quantity = Integer.parseInt(invoiceDetails[4]);
+        double total_price = price * quantity;
+        invoiceDetails[6] = String.valueOf(total_price);
+	
+		
+		
+		return invoiceDetails;
+	}
 
 	public List<String[]> viewSales(List<String[]> salesList) {
 		// TODO Auto-generated method stub

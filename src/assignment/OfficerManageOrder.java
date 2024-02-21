@@ -174,6 +174,22 @@ public class OfficerManageOrder extends JFrame {
 		
 
 		btnSearch = new JButton("Search");
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+                String OrderID = (String) cmbID.getSelectedItem();
+            	Officer obj1 = new Officer();
+				Sales obj2 = new Sales();
+				
+				//load Data
+				List<String[]> salesList = obj2.loadData();
+                String[] searchedSales = obj1.searchSales(salesList,OrderID);
+                
+                //use the array and pass it to another form
+                SearchSales A = new SearchSales(searchedSales);
+                A.setVisible(true);
+				
+			}
+		});
 		btnSearch.setBounds(236, 330, 89, 21);
 		contentPane.add(btnSearch);
 		
@@ -217,6 +233,20 @@ public class OfficerManageOrder extends JFrame {
 		contentPane.add(btnEditSaleStatus);
 		
 		JButton btnDelete_1_1 = new JButton("Issue Invoice");
+		btnDelete_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+                String OrderID = (String) cmbID.getSelectedItem();
+            	Officer obj1 = new Officer();
+				Sales obj2 = new Sales();
+				
+				//load Data and generate invoice details
+				List<String[]> salesList = obj2.loadData();
+                String[] InvoiceDetails = obj1.generateInvoice(salesList,OrderID);
+                Invoice A = new Invoice(InvoiceDetails);
+                A.setVisible(true);
+                
+			}
+		});
 		btnDelete_1_1.setBounds(82, 427, 160, 23);
 		contentPane.add(btnDelete_1_1);
 		

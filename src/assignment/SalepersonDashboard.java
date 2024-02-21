@@ -37,7 +37,7 @@ public class SalepersonDashboard extends JFrame {
 	 */
 	public SalepersonDashboard() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 594, 490);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -58,7 +58,7 @@ public class SalepersonDashboard extends JFrame {
 			}
 		});
 		btnLogout.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnLogout.setBounds(34, 199, 111, 54);
+		btnLogout.setBounds(10, 294, 111, 54);
 		contentPane.add(btnLogout);
 		
 		JButton btnManageProfile = new JButton("Manage Profile");
@@ -72,6 +72,14 @@ public class SalepersonDashboard extends JFrame {
 		btnManageProfile.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnManageProfile.setBounds(34, 73, 195, 64);
 		contentPane.add(btnManageProfile);
+		
+		JButton btnManageSales = new JButton("Manage Sales");
+		btnManageSales.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnManageSales.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnManageSales.setBounds(34, 147, 195, 64);
+		contentPane.add(btnManageSales);
 	}
-
 }
