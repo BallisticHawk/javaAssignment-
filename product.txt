@@ -1,0 +1,2 @@
+ID001,Table,bar furniture,1050,yes,table for 4 for bar uses only,John Doe,175,100,250
+ID001,Table,bar furniture,1050,yes,table for 4 for bar uses only,John Doe,175,100,250
