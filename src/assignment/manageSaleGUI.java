@@ -29,9 +29,6 @@ public class manageSaleGUI extends JFrame {
     }
 
     public manageSaleGUI() {
-    	
-		//String UID = Account.UID;
-		
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1115, 490);
         contentPane = new JPanel();
@@ -64,14 +61,20 @@ public class manageSaleGUI extends JFrame {
         JButton btnUpdate = new JButton("Update");
         btnUpdate.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	editSalesData = new modifyData();
                 DefaultTableModel model = (DefaultTableModel) table.getModel();
-                editSalesData.updateSalesData(model);
-                
+                List<String[]> tableData = new ArrayList<>();
+                for (int i = 0; i < model.getRowCount(); i++) {
+                    String[] rowData = new String[model.getColumnCount()];
+                    for (int j = 0; j < model.getColumnCount(); j++) {
+                        rowData[j] = String.valueOf(model.getValueAt(i, j));
+                    }
+                    tableData.add(rowData);
+                }
+                modifyData.updateSalesData(tableData);
                 JOptionPane.showMessageDialog(manageSaleGUI.this, "Data updated successfully!");
             }
         });
-        
+
         btnUpdate.setBounds(140, 406, 89, 23);
         contentPane.add(btnUpdate);
         

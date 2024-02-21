@@ -70,17 +70,19 @@ public class dataReader {
                 parts[lineCount % 13] = line.trim(); // Store each line in the corresponding position in the array
                 lineCount++;
 
-                // If 10 lines have been read (representing 10 columns), add them as a row to the model
+                // If 13 lines have been read (representing one row), add them as a row to the model
                 if (lineCount % 13 == 0) {
-                    model.addRow(parts);
+                    // Check if the Salesperson_ID matches the Account.UID attribute
+                    if (parts[2].equals("e879e184-6dbb-4335-b29a-f8785192d638123")) {
+                        model.addRow(parts);
+                    }
                 }
             }
             
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
         return model;
     }
 }
-
