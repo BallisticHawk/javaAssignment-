@@ -29,6 +29,9 @@ public class manageSaleGUI extends JFrame {
     }
 
     public manageSaleGUI() {
+    	
+		//String UID = Account.UID;
+		
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1115, 490);
         contentPane = new JPanel();

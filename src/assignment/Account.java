@@ -22,7 +22,6 @@ public class Account extends FileClass {
 	public String user_email;
 	public static String UID;
 	public String role;
-	
 	public Account(String user_name, String user_password, String user_email) {
 		super("staffFile.txt");
 		this.user_name = user_name;
@@ -179,7 +178,13 @@ public class Account extends FileClass {
 	
 	//edit personal profile
 	public String editProfile(String[] updatedProfile) {
+		//updatedProfile is array that stored the lastest info of the profile
+		
+		
+		//accountList is original dataset.
 		List<String[]> accountList = loadData();
+		
+		//loop f
 		for (String[] account: accountList) {
 			if(account[3].equals(UID)) {
 	            for (int i = 0; i < account.length; i++) {
