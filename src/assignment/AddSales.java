@@ -133,25 +133,34 @@ public class AddSales extends JFrame {
 				// take the textfield value;
 				String name = txtItem.getText();
 				String SP = Account.UID;
-			    double price = Double.parseDouble(txtPrice.getText());
-			    int quantity = Integer.parseInt(txtQuantity.getText());
-			    int day = Integer.parseInt(txtDay.getText());
-			    int month = Integer.parseInt(txtMonth.getText());
-			    int year = Integer.parseInt(txtYear.getText());
+				
+				String day = txtDay.getText();
+				String month = txtMonth.getText();
+				String year = txtYear.getText();
 			    String customerName = txtCustomerName.getText();
 			    String customerAddress = txtCustomerAddress.getText();
 			    String customerContact = txtCustomerContact.getText();
-
-				Sales obj1 = new Sales(name,  SP,price, quantity, day,  month,  year,  customerName,  customerAddress,  customerContact); 
-				Validation validator = new Validation();
-				boolean itemname_b = validator.validate(name,"name");
-				boolean customerName_b = validator.validate(customerName,"name");
-				boolean customerContact_b = validator.validate(customerContact,"contact");
-				if (itemname_b == true && customerName_b == true && customerContact_b == true) {
+			    String quantity = txtQuantity.getText();
+			    String price = txtPrice.getText();
+			    
+				boolean date_b = Validation.validateDate(day, month, year);
+				boolean quantity_b = Validation.validate(quantity);
+				boolean price_b = Validation.validate(price);
+				boolean itemname_b = Validation.validate(name,"name");
+				boolean customerName_b = Validation.validate(customerName,"name");
+				//boolean customerContact_b = Validation.validate(customerContact,"contact");
+				if(date_b == true && quantity_b == true && price_b == true && itemname_b == true && customerName_b == true) {
+					double doublePrice = Double.parseDouble(txtPrice.getText());
+				    int intQuantity = Integer.parseInt(txtQuantity.getText());
+				    int intDay = Integer.parseInt(day);
+				    int intMonth = Integer.parseInt(month);
+				    int intYear = Integer.parseInt(year);
+				    Sales obj1 = new Sales(name,  SP,doublePrice, intQuantity, intDay,  intMonth,  intYear,  customerName,  customerAddress,  customerContact); 
 					String message = obj1.insertData();
 	                JOptionPane.showMessageDialog(AddSales.this, message);
-				}else {
-	                JOptionPane.showMessageDialog(null, "Invalid itemname or customername or customercontact");
+				}
+				else {
+	                JOptionPane.showMessageDialog(null, "Invalid input please check the format carefully");
 
 				}
 

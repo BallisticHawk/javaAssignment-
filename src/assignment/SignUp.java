@@ -105,9 +105,8 @@ public class SignUp extends JFrame {
 		        String password = String.valueOf(txtPassword.getPassword());
 				Account obj1 = new Account(name,password,email);
 
-				Validation validator = new Validation();
-				boolean nameb = validator.validate(name,"name");
-				boolean emailb = validator.validate(name,"email");
+				boolean nameb = Validation.validate(name,"name");
+				boolean emailb = Validation.validate(name,"email");
 				
 				if (nameb == true && emailb == true ) {
 

@@ -76,12 +76,11 @@ public class Validation {
 	    
 	    //check date
 	    public static Boolean validateDate(String day, String month, String year){
-	    	
-	        int intDay = Integer.parseInt(day);
-	        int intMonth = Integer.parseInt(month);
-	        int intYear = Integer.parseInt(year);
 
 	        try {
+		        int intDay = Integer.parseInt(day);
+		        int intMonth = Integer.parseInt(month);
+		        int intYear = Integer.parseInt(year);
 	            LocalDate.of(intYear, intMonth, intDay);
 	            return true; // If no exception is thrown, the date is valid
 	        } catch (Exception e) {

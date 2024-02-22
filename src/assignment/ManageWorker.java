@@ -165,9 +165,8 @@ public class ManageWorker extends JFrame {
 		        updatedData[0] = txtEmail.getText();
 				updatedData[2] = txtName.getText();
 			    updatedData[4] = (String) cmbRole.getSelectedItem();
-		        Validation validator = new Validation();
-		        boolean name_b = validator.validate(updatedData[2],"name");
-		        boolean email_b = validator.validate(updatedData[0],"email");
+		        boolean name_b = Validation.validate(updatedData[2],"name");
+		        boolean email_b = Validation.validate(updatedData[0],"email");
 		        
 		        if (name_b == true && email_b == true) {
 
