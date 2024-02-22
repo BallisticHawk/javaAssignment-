@@ -95,7 +95,10 @@ public class EditProfile extends JFrame {
 				
 				//prompt user for old password to edit their profile.
 		        String oldPassword = JOptionPane.showInputDialog(null, "Enter your old password to make changes:");
-		        if(oldPassword.equals(info[1])) {
+		        Validation validator = new Validation();
+		        boolean name_c = validator.validate(info[2],"name");
+		        boolean email_c = validator.validate(info[0],"email");
+		        if(name_c == true && email_c == true && oldPassword.equals(info[1])) {
 					//get the new information and stored it into array and passed it into the method editProfile.
 
 					info[0] = textEmail.getText();
