@@ -105,17 +105,28 @@ public class SignUp extends JFrame {
 		        String password = String.valueOf(txtPassword.getPassword());
 				Account obj1 = new Account(name,password,email);
 
-				String signup = obj1.insertData();
-				if(signup.equals("Account have been registered.")) {
-		            JOptionPane.showMessageDialog(null,signup,"Sign Up",JOptionPane.INFORMATION_MESSAGE);
-			        Login A = new Login();
-			        A.setVisible(true);
-			        dispose();
-				}else {
-		            JOptionPane.showMessageDialog(null,signup,"Sign Up",JOptionPane.INFORMATION_MESSAGE);
+				Validation validator = new Validation();
+				boolean nameb = validator.validate(name,"name");
+				boolean emailb = validator.validate(name,"email");
+				
+				if (nameb == true && emailb == true ) {
+
+					String signup = obj1.insertData();
+					if(signup.equals("Account have been registered.")) {
+			            JOptionPane.showMessageDialog(null,signup,"Sign Up",JOptionPane.INFORMATION_MESSAGE);
+				        Login A = new Login();
+				        A.setVisible(true);
+				        dispose();
+					}else {
+			            JOptionPane.showMessageDialog(null,signup,"Sign Up",JOptionPane.INFORMATION_MESSAGE);
+
+					}
+
+					
+				}	else {
+		            JOptionPane.showMessageDialog(null,"Invalid format of name or email","Error",JOptionPane.ERROR_MESSAGE);
 
 				}
-				
 			}
 		});
 		btnSignUp.setFont(new Font("Tahoma", Font.PLAIN, 15));
