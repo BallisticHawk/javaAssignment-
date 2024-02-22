@@ -120,18 +120,26 @@ public class AdminSignUp extends JFrame {
 		        String password = String.valueOf(txtPassword.getPassword());
 		        String role = (String) comboBox.getSelectedItem();
 				Admin obj1 = new Admin(name,password,email,role);
+				Validation validator = new Validation();
+				boolean name_b = validator.validate(name,"name");
+				boolean email_b = validator.validate(email,"email");
 
-				String signup = obj1.insertData();
-				if(signup.equals("Account have been registered.")) {
-		            JOptionPane.showMessageDialog(null,signup,"Sign Up",JOptionPane.INFORMATION_MESSAGE);
-			        ManageWorker A = new ManageWorker();
-			        A.setVisible(true);
-			        dispose();
+				if (name_b == true && email_b == true) {
+					String signup = obj1.insertData();
+					if(signup.equals("Account have been registered.")) {
+			            JOptionPane.showMessageDialog(null,signup,"Sign Up",JOptionPane.INFORMATION_MESSAGE);
+				        ManageWorker A = new ManageWorker();
+				        A.setVisible(true);
+				        dispose();
+					}else {
+			            JOptionPane.showMessageDialog(null,signup,"Sign Up",JOptionPane.INFORMATION_MESSAGE);
+
+					}
+	
 				}else {
-		            JOptionPane.showMessageDialog(null,signup,"Sign Up",JOptionPane.INFORMATION_MESSAGE);
-
+					JOptionPane.showMessageDialog(null, "Your name should be only character Or Your please enter a valid email");
 				}
-				
+								
 			}
 		});
 		btnSignUp.setFont(new Font("Tahoma", Font.PLAIN, 15));
