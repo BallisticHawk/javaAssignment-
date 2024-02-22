@@ -31,6 +31,24 @@ public class Validation {
 
 	           
 	        }
+	        //allow int only
+	        else if (type == "int") {
+	        	if(!input.matches("0123456789")) {
+	        		return false;
+	        	}
+	        	else {
+	        		return true;
+	        	}
+	        }
+	        // allow contact 10-11 digits
+	        else if (type == "contact") {
+	        	if(input.length() != 10 || input.length() != 11) {
+	        		return false;
+	        	}
+	        	else {
+	        		return true;
+	        	}
+	        }
 	        return true;
 	 
 	        

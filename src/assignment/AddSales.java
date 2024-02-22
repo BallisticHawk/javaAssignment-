@@ -143,8 +143,18 @@ public class AddSales extends JFrame {
 			    String customerContact = txtCustomerContact.getText();
 
 				Sales obj1 = new Sales(name,  SP,price, quantity, day,  month,  year,  customerName,  customerAddress,  customerContact); 
-				String message = obj1.insertData();
-                JOptionPane.showMessageDialog(AddSales.this, message);
+				Validation validator = new Validation();
+				boolean itemname_b = validator.validate(name,"name");
+				boolean customerName_b = validator.validate(customerName,"name");
+				boolean customerContact_b = validator.validate(customerContact,"contact");
+				if (itemname_b == true && customerName_b == true && customerContact_b == true) {
+					String message = obj1.insertData();
+	                JOptionPane.showMessageDialog(AddSales.this, message);
+				}else {
+	                JOptionPane.showMessageDialog(null, "Invalid itemname or customername or customercontact");
+
+				}
+
 
 			}
 

@@ -181,28 +181,35 @@ public class addProductGUI extends JFrame {
 				String Height = height.getText();
 				String Width = width.getText();
 				
-				
-				addProduct obj1 = new addProduct (ItemId, Name, Category, Price, SellableOnline, ShowDescription,Designer, Depth, Height, Width);
-				String result = obj1.writeProduct(ItemId, Name, Category, Price, SellableOnline, ShowDescription, Designer, Depth, Height, Width);
+				Validation validator = new Validation();
+				boolean Name_b = validator.validate(Name,"name");
+				if (Name_b == true) {
+					addProduct obj1 = new addProduct (ItemId, Name, Category, Price, SellableOnline, ShowDescription,Designer, Depth, Height, Width);
+					String result = obj1.writeProduct(ItemId, Name, Category, Price, SellableOnline, ShowDescription, Designer, Depth, Height, Width);
 
-				
-				if (result.equals("Success")) {
-		            JOptionPane.showMessageDialog(null, "Product added successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+					
+					if (result.equals("Success")) {
+			            JOptionPane.showMessageDialog(null, "Product added successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
 
-		            // Clear text fields
-		            itemId.setText("");
-		            name.setText("");
-		            category.setText("");
-		            price.setText("");
-		            sellableStatus.setText("");
-		            shortDesc.setText("");
-		            designer.setText("");
-		            depth.setText("");
-		            height.setText("");
-		            width.setText("");
-		        } else {
-		            JOptionPane.showMessageDialog(null, "Error occurred while adding product.", "Error", JOptionPane.ERROR_MESSAGE);
-		        }
+			            // Clear text fields
+			            itemId.setText("");
+			            name.setText("");
+			            category.setText("");
+			            price.setText("");
+			            sellableStatus.setText("");
+			            shortDesc.setText("");
+			            designer.setText("");
+			            depth.setText("");
+			            height.setText("");
+			            width.setText("");
+			        } else {
+			            JOptionPane.showMessageDialog(null, "Error occurred while adding product.", "Error", JOptionPane.ERROR_MESSAGE);
+			        }					
+				}else {
+		            JOptionPane.showMessageDialog(null, "Invalid name format.", "Error", JOptionPane.ERROR_MESSAGE);
+
+				}
+
 		    }
 		});
 	}
