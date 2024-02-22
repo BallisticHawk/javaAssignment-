@@ -62,25 +62,26 @@ public class ManageWorker extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		txtName = new JTextField();
+		txtName.setBounds(45, 275, 135, 23);
 		txtName.setText("Name");
 		txtName.setColumns(10);
-		txtName.setBounds(45, 275, 135, 23);
 		contentPane.add(txtName);
 		
 		txtEmail = new JTextField();
+		txtEmail.setBounds(45, 313, 135, 23);
 		txtEmail.setText("Email");
 		txtEmail.setColumns(10);
-		txtEmail.setBounds(45, 313, 135, 23);
 		contentPane.add(txtEmail);		
 		
 		
 		
 		JComboBox cmbRole = new JComboBox();
+		cmbRole.setBounds(201, 277, 166, 22);
 		cmbRole.setModel(new DefaultComboBoxModel(new String[] {"SELECT", "Admin", "Salesperson", "Officer", "Unassigned"}));
 		cmbRole.setFont(new Font("Verdana", Font.PLAIN, 15));
-		cmbRole.setBounds(201, 277, 166, 22);
 		contentPane.add(cmbRole);
 		JComboBox cmbID = new JComboBox();
+		cmbID.setBounds(201, 229, 255, 30);
 		cmbID.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//put the value into the text field
@@ -103,11 +104,10 @@ public class ManageWorker extends JFrame {
 				
 			}
 		});
-		cmbID.setBounds(201, 229, 255, 30);
 		contentPane.add(cmbID);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(25, 76, 452, 426);
+		scrollPane.setBounds(25, 76, 576, 143);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
@@ -150,11 +150,12 @@ public class ManageWorker extends JFrame {
 		
 		
 		JLabel lblNewLabel = new JLabel("Worker Profile");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblNewLabel.setBounds(25, 25, 191, 23);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		contentPane.add(lblNewLabel);
 		
 		JButton btnSave = new JButton("Save");
+		btnSave.setBounds(466, 269, 135, 30);
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -183,12 +184,11 @@ public class ManageWorker extends JFrame {
 				
 			}
 		});
-		btnSave.setBounds(466, 269, 135, 30);
 		contentPane.add(btnSave);
 		
 		txtSearch = new JTextField();
-		txtSearch.setText("Search");
 		txtSearch.setBounds(226, 25, 135, 23);
+		txtSearch.setText("Search");
 		contentPane.add(txtSearch);
 		txtSearch.setColumns(10);
 		
@@ -197,6 +197,7 @@ public class ManageWorker extends JFrame {
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnCreate = new JButton("Create");
+		btnCreate.setBounds(35, 229, 156, 30);
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AdminSignUp A = new AdminSignUp();
@@ -204,10 +205,10 @@ public class ManageWorker extends JFrame {
 				dispose();
 			}
 		});
-		btnCreate.setBounds(35, 229, 156, 30);
 		contentPane.add(btnCreate);
 		
 		JButton btnDelete = new JButton("Delete");
+		btnDelete.setBounds(466, 229, 135, 30);
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//delete the account.
@@ -220,10 +221,10 @@ public class ManageWorker extends JFrame {
 				
 			}
 		});
-		btnDelete.setBounds(466, 229, 135, 30);
 		contentPane.add(btnDelete);
 		
 		JButton btnBack = new JButton("Back");
+		btnBack.setBounds(35, 360, 156, 30);
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AdminDashboard A = new AdminDashboard();
@@ -231,7 +232,6 @@ public class ManageWorker extends JFrame {
 				dispose();
 			}
 		});
-		btnBack.setBounds(35, 360, 156, 30);
 		contentPane.add(btnBack);
 		
 
