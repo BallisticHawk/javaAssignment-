@@ -214,16 +214,21 @@ public class ManageWorker extends JFrame {
 				
 		        String Password = JOptionPane.showInputDialog(null, "Enter your password to delete this account");
 		        if (Password != null) {
+		        	//check authorization before admin perform delete of account.
 		        	Boolean authorization = obj1.authenticate(Password);
 		        	if (authorization == true) {
+						//delete the account.
+
 						Admin obj1 = new Admin();
 						obj1.deleteAccount(info[3]);
 						ManageWorker A = new ManageWorker();
 						A.setVisible(true);
 						dispose();
+		        	}else {
+			            JOptionPane.showMessageDialog(null, "Incorrect password. Please try again.");
+
 		        	}
 		        }
-				//delete the account.
 
 				
 				
