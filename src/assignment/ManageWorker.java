@@ -161,27 +161,37 @@ public class ManageWorker extends JFrame {
 				
 				//store updated information into an array 
 		        String[] updatedData = info;
+
 		        updatedData[0] = txtEmail.getText();
 				updatedData[2] = txtName.getText();
 			    updatedData[4] = (String) cmbRole.getSelectedItem();
+		        Validation validator = new Validation();
+		        boolean name_b = validator.validate(updatedData[2],"name");
+		        boolean email_b = validator.validate(updatedData[0],"email");
+		        
+		        if (name_b == true && email_b == true) {
+
+			        //make modification
+			        Admin obj1 = new Admin();
+			        int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to save the changes? The action cannot be undo.", "Confirmation", JOptionPane.YES_NO_OPTION);
+			        if (choice == JOptionPane.YES_OPTION) {
+			        String message = obj1.editProfile(updatedData,info[3]);
+		            JOptionPane.showMessageDialog(null,message,"Edit Profile",JOptionPane.INFORMATION_MESSAGE);
+		            
+		            //refresh the page.
+		            ManageWorker A = new ManageWorker();
+		            A.setVisible(true);
+		            dispose();
+			        }
 			        
+					
+		        }else {
+		            JOptionPane.showMessageDialog(null,"Invalid name or email","Edit Profile",JOptionPane.ERROR_MESSAGE);
+
+		        }
 
 		        
-		        
-		        //make modification
-		        Admin obj1 = new Admin();
-		        int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to save the changes? The action cannot be undo.", "Confirmation", JOptionPane.YES_NO_OPTION);
-		        if (choice == JOptionPane.YES_OPTION) {
-		        String message = obj1.editProfile(updatedData,info[3]);
-	            JOptionPane.showMessageDialog(null,message,"Edit Profile",JOptionPane.INFORMATION_MESSAGE);
-	            
-	            //refresh the page.
-	            ManageWorker A = new ManageWorker();
-	            A.setVisible(true);
-	            dispose();
-		        }
-		        
-				
+		        	
 			}
 		});
 		contentPane.add(btnSave);
