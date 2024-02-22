@@ -89,6 +89,9 @@ public class AdminDashboard extends JFrame {
 		JButton btnGenerateReport = new JButton("Generate Report");
 		btnGenerateReport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ReportSelection A = new ReportSelection();
+				A.setVisible(true);
+				dispose();
 			}
 		});
 		btnGenerateReport.setFont(new Font("Tahoma", Font.PLAIN, 15));

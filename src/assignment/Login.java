@@ -77,7 +77,7 @@ public class Login extends JFrame {
 				String email = txtEmail.getText();
 		        String password = String.valueOf(txtPassword.getPassword());
 				Account obj1 = new Account();
-				String[] login = obj1.authenticateLogin(email, password);
+				String[] login = obj1.authenticate(email, password);
 				if(login[0].equals("success")) {
 		            JOptionPane.showMessageDialog(null,login[1],"Login",JOptionPane.INFORMATION_MESSAGE);
 		            if(login[2].equals("Officer")) {

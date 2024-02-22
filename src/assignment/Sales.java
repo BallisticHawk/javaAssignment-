@@ -200,12 +200,13 @@ public class Sales extends FileClass{
 		return null;
 	}
 	
-	public List<String[]> generateReport(String year){
+	public String[] generateReport(String year){
+		int totalWorkDone = 0, totalPendingProductStatus = 0, totalInProgress = 0, totalApproved = 0,totalUnapproved = 0, totalPendingSalesStatus = 0, totalClosed = 0;
+		double totalPendingSales = 0, totalUnapprovedSales = 0, totalApprovedSales = 0, totalClosedSales = 0;
 		
 		//load all the sales
 		List<String[]> salesList = viewSales();
         List<String[]> filteredSales = new ArrayList<>();
-		String[] reportDetail = new String[15];
 
 		for(String[] sales: salesList) {
 			//if is in the selected year
@@ -214,15 +215,87 @@ public class Sales extends FileClass{
 			}
 		}
 		
+		//calculate total number of each sales status & product status
+		//also calculate total sales for each sales status
+		for(String[] sales: filteredSales) {
+
+			// calculate subtotal of every particular sales //index 4 is quantity while index 5 is price per unit.
+			double subtotal = Double.parseDouble(sales[3]) * Double.parseDouble(sales[4]);
+
+			if(sales[8].equals("Pending")) {
+				totalPendingSalesStatus++;
+				totalPendingSales += subtotal;
+				
+			}
+			else if(sales[8].equals("Closed")) {
+				totalClosed++;
+				totalClosedSales += subtotal;
+
+			}
+			else if(sales[8].equals("Unapproved")) {
+				totalUnapproved++;
+				totalUnapproved += subtotal;
+
+
+			}
+			else {
+				totalApproved++;
+				totalApprovedSales += subtotal;
+
+			}
+			
+			if(sales[9].equals("Pending")) {
+				totalPendingProductStatus++;
+				
+			}else if(sales[9].equals("In Progress")){
+				totalInProgress++;
+				
+			}
+			else {
+				totalWorkDone++;
+			}
+			
+		}
 		
+        //format the report details
+		//array column (title,
+		String[] reportDetail = new String[15];
+		reportDetail[0] = year;
 		
+		//sales status
+		reportDetail[1] = String.valueOf(totalPendingSalesStatus);
+		reportDetail[2] = String.valueOf(totalApproved);
+		reportDetail[3] = String.valueOf(totalUnapproved);
+		reportDetail[4] = String.valueOf(totalClosed);
+
+		//product status
+		reportDetail[5] = String.valueOf(totalPendingProductStatus);
+		reportDetail[6] = String.valueOf(totalInProgress);
+		reportDetail[7] = String.valueOf(totalWorkDone);
 		
-		return null;
+
+		
+		//		double totalPendingSales = 0, totalUnapprovedSales = 0, totalApprovedSales = 0, totalClosedSales = 0;
+		//sub total of sales categories by their sales status
+		reportDetail[8] = String.valueOf(totalPendingSales);
+		reportDetail[9] = String.valueOf(totalApprovedSales);
+		reportDetail[10] = String.valueOf(totalUnapprovedSales);
+		reportDetail[11] = String.valueOf(totalClosedSales);
+				
+		//total quantity of all sales
+		reportDetail[12] = String.valueOf(totalPendingSalesStatus + totalUnapproved + totalApproved + totalClosed);
+		
+		//total price of all sales
+		reportDetail[13] = String.valueOf(totalClosedSales + totalApprovedSales + totalPendingSales + totalUnapprovedSales);
+
+		return reportDetail;
 		
 	}
-	public List<String[]> generateReport(String month, String year){
+	public String[] generateReport(String month, String year){
 		
-		int totalWorkDone, totalPendingProduct, totalInProgress, totalApproved, totalPendingSales, totalClosed;
+		int totalWorkDone = 0, totalPendingProductStatus = 0, totalInProgress = 0, totalApproved = 0,totalUnapproved = 0, totalPendingSalesStatus = 0, totalClosed = 0;
+		double totalPendingSales = 0, totalUnapprovedSales = 0, totalApprovedSales = 0, totalClosedSales = 0;
+		
 		//load all the sales
 		List<String[]> salesList = viewSales();
         
@@ -236,40 +309,87 @@ public class Sales extends FileClass{
 		}
 		
 		
-		//calculate total number of each sales & product status
-		
+		//calculate total number of each sales status & product status
+		//also calculate total sales for each sales status
 		for(String[] sales: filteredSales) {
+			
+			// calculate subtotal of every particular sales //index 4 is quantity while index 5 is price per unit.
+			double subtotal = Double.parseDouble(sales[3]) * Double.parseDouble(sales[4]);
+
 			if(sales[8].equals("Pending")) {
+				totalPendingSalesStatus++;
+				totalPendingSales += subtotal;
 				
 			}
+			else if(sales[8].equals("Closed")) {
+				totalClosed++;
+				totalClosedSales += subtotal;
+
+			}
+			else if(sales[8].equals("Unapproved")) {
+				totalUnapproved++;
+				totalUnapproved += subtotal;
+
+
+			}
+			else {
+				totalApproved++;
+				totalApprovedSales += subtotal;
+
+			}
+			
+			if(sales[9].equals("Pending")) {
+				totalPendingProductStatus++;
+				
+			}else if(sales[9].equals("In Progress")){
+				totalInProgress++;
+				
+			}
+			else {
+				totalWorkDone++;
+			}
+			
 		}
 		
         //format the report details
-		//arrary column (title,
+		//array column (title,
 		String[] reportDetail = new String[15];
 		reportDetail[0] = month + "/" + year;
 		
-		
-		//product status
-		reportDetail[1] = String.valueOf(totalPendingProduct);
-		reportDetail[2] = String.valueOf(totalInProgress);
-		reportDetail[3] = String.valueOf(totalWorkDone);
-		
 		//sales status
-		reportDetail[4] = String.valueOf(totalPendingSales);
-		reportDetail[5] = String.valueOf(totalApproved);
-		reportDetail[6] = String.valueOf(totalClosed);
+		reportDetail[1] = String.valueOf(totalPendingSalesStatus);
+		reportDetail[2] = String.valueOf(totalApproved);
+		reportDetail[3] = String.valueOf(totalUnapproved);
+		reportDetail[4] = String.valueOf(totalClosed);
+
+		//product status
+		reportDetail[5] = String.valueOf(totalPendingProductStatus);
+		reportDetail[6] = String.valueOf(totalInProgress);
+		reportDetail[7] = String.valueOf(totalWorkDone);
+		
+
+		
+		//		double totalPendingSales = 0, totalUnapprovedSales = 0, totalApprovedSales = 0, totalClosedSales = 0;
+		//sub total of sales categories by their sales status
+		reportDetail[8] = String.valueOf(totalPendingSales);
+		reportDetail[9] = String.valueOf(totalApprovedSales);
+		reportDetail[10] = String.valueOf(totalUnapprovedSales);
+		reportDetail[11] = String.valueOf(totalClosedSales);
+				
 		
 		
-		//total of all sales
-		reportDetail[7] = totalWorkDone + totalPendingProduct + totalInProgress + totalApproved + totalPendingSales + totalClosed;
+		//total quantity of all sales
+		reportDetail[12] = String.valueOf(totalPendingSalesStatus + totalUnapproved + totalApproved + totalClosed);
 		
+		//total price of all sales
+		reportDetail[13] = String.valueOf(totalClosedSales + totalApprovedSales + totalPendingSales + totalUnapprovedSales);
+
 		
 		
 
 		
 		
-		return filteredSales;
+		return reportDetail;
 		
 	}
 	

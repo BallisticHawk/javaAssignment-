@@ -153,8 +153,18 @@ public class addProductGUI extends JFrame {
 		width.setColumns(10);
 		
 		JButton addProductButton = new JButton("Add Product");
-		addProductButton.setBounds(165, 378, 105, 30);
+		addProductButton.setBounds(277, 378, 105, 30);
 		contentPane.add(addProductButton);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				addProductGUI A = new addProductGUI();
+				A.setVisible(true);
+			}
+		});
+		btnBack.setBounds(149, 378, 105, 30);
+		contentPane.add(btnBack);
 		
 		
 		addProductButton.addActionListener(new ActionListener() {

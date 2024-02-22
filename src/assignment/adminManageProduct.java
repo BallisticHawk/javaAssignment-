@@ -97,13 +97,17 @@ public class adminManageProduct extends JFrame {
         btnUpdate.setBounds(140, 406, 89, 23);
         contentPane.add(btnUpdate);
         
-        JButton btnDelete = new JButton("Delete Row");
+        JButton btnDelete = new JButton("Delete");
         btnDelete.setBounds(239, 406, 99, 23);
         contentPane.add(btnDelete);
         
         JButton btnAddProduct = new JButton("Add Product");
         btnAddProduct.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		addProductGUI A = new addProductGUI();
+        		A.setVisible(true);
+        		dispose();
+        		
         	}
         });
         btnAddProduct.setBounds(348, 406, 114, 23);

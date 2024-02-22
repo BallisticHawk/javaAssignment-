@@ -182,14 +182,6 @@ public class Invoice extends JFrame {
 		});
 		btnClose.setBounds(257, 447, 85, 21);
 		contentPane.add(btnClose);
-		
-		JButton btnPrint = new JButton("Print");
-		btnPrint.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnPrint.setBounds(362, 447, 85, 21);
-		contentPane.add(btnPrint);
 
 	}
 }

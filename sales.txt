@@ -2,12 +2,12 @@
 Table123
 e879e184-6dbb-4335-b29a-f8785192d638
 60.0
-2233
+2
 27
 12
 2025
-pending
-pending
+Approved
+Pending
 Customer Name
 Customer Address
 Customer Contact
@@ -15,12 +15,12 @@ Customer Contact
 Chair123
 e879e184-6dbb-4335-b29a-f8785192d638
 60.0
-2233
+2
 31
 12
 2025
-pending
-pending
+Pending
+Pending
 Customer Name
 Customer Address
 Customer Contact

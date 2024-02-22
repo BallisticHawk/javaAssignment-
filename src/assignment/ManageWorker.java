@@ -211,12 +211,20 @@ public class ManageWorker extends JFrame {
 		btnDelete.setBounds(466, 229, 135, 30);
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+		        String Password = JOptionPane.showInputDialog(null, "Enter your password to delete this account");
+		        if (Password != null) {
+		        	Boolean authorization = obj1.authenticate(Password);
+		        	if (authorization == true) {
+						Admin obj1 = new Admin();
+						obj1.deleteAccount(info[3]);
+						ManageWorker A = new ManageWorker();
+						A.setVisible(true);
+						dispose();
+		        	}
+		        }
 				//delete the account.
-				Admin obj1 = new Admin();
-				obj1.deleteAccount(info[3]);
-				ManageWorker A = new ManageWorker();
-				A.setVisible(true);
-				dispose();
+
 				
 				
 			}

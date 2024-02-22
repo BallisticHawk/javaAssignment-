@@ -35,18 +35,18 @@ public class Salesperson extends Account implements ManageSales{
 
         // Add headers to the model
         model.addColumn("Order ID");
-        model.addColumn("name");
+        model.addColumn("Name");
         model.addColumn("Salesperson_ID");
-        model.addColumn("price");
-        model.addColumn("quantity");
-        model.addColumn("day");
-        model.addColumn("month");
-        model.addColumn("year");
-        model.addColumn("saleStatus");
-        model.addColumn("productStatus");
-        model.addColumn("customerName");
-        model.addColumn("address");
-        model.addColumn("contact");
+        model.addColumn("Price");
+        model.addColumn("Quantity");
+        model.addColumn("Day");
+        model.addColumn("Month");
+        model.addColumn("Year");
+        model.addColumn("Sales Status");
+        model.addColumn("Product Status");
+        model.addColumn("Customer Name");
+        model.addColumn("Address");
+        model.addColumn("Contact");
 		
 		
 		for(String[] sales : salesList) {

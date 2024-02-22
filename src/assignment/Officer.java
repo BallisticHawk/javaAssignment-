@@ -40,8 +40,8 @@ public class Officer extends Account implements ManageSales{
 		String[] invoiceDetails = obj1.searchSales(ID);
 		
 		//calculate total price by using price * quantity
-        double price = Integer.parseInt(invoiceDetails[3]);
-        double quantity = Integer.parseInt(invoiceDetails[4]);
+        double price = Double.parseDouble(invoiceDetails[3]);
+        int quantity = Integer.parseInt(invoiceDetails[4]);
         double total_price = price * quantity;
         invoiceDetails[6] = String.valueOf(total_price);
 	

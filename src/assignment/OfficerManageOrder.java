@@ -34,7 +34,6 @@ public class OfficerManageOrder extends JFrame {
 	private JComboBox cmbProduct;
 	private JButton btnSearch;
 	private JLabel lblOrders;
-	private JButton btnViewReport;
 	private JButton btnEditProductStatus;
 	private JButton btnBack;
 
@@ -66,12 +65,12 @@ public class OfficerManageOrder extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		cmbSale = new JComboBox();
-		cmbSale.setModel(new DefaultComboBoxModel(new String[] {"SELECT", "pending", "approval", "closed"}));
+		cmbSale.setModel(new DefaultComboBoxModel(new String[] {"SELECT", "Pending", "Approved", "Unapproved", "Closed"}));
 		cmbSale.setBounds(123, 356, 96, 20);
 		contentPane.add(cmbSale);
 		
 		cmbProduct = new JComboBox();
-		cmbProduct.setModel(new DefaultComboBoxModel(new String[] {"SELECT", "pending", "work done", "in progress"}));
+		cmbProduct.setModel(new DefaultComboBoxModel(new String[] {"SELECT", "Pending", "Work done", "In progress"}));
 		cmbProduct.setBounds(123, 381, 96, 20);
 		contentPane.add(cmbProduct);
 		
@@ -113,10 +112,12 @@ public class OfficerManageOrder extends JFrame {
 		contentPane.add(cmbID);
 		
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setEnabled(false);
 		scrollPane.setBounds(10, 85, 1071, 191);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
+		table.setEnabled(false);
 		table.setColumnSelectionAllowed(true);
 		table.setCellSelectionEnabled(true);
 		scrollPane.setViewportView(table);
@@ -191,10 +192,6 @@ public class OfficerManageOrder extends JFrame {
 		lblOrders.setBounds(10, 27, 140, 23);
 		contentPane.add(lblOrders);
 		
-		btnViewReport = new JButton("View Report");
-		btnViewReport.setBounds(411, 285, 113, 23);
-		contentPane.add(btnViewReport);
-		
 		JButton btnEditSaleStatus = new JButton("Edit");
 		btnEditSaleStatus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -258,7 +255,7 @@ public class OfficerManageOrder extends JFrame {
 				
 				//modify and overwrite to the text file.
 				
-				if(saleStatus.equals("approval")) {
+				if(saleStatus.equals("Approved")) {
 					List<String[]> updatedSalesList = obj2.modifySales(salesList, OrderID, saleStatus,productStatus);
 					
 					obj1.overwriteData(updatedSalesList);
@@ -268,7 +265,7 @@ public class OfficerManageOrder extends JFrame {
 					A.setVisible(true);
 					dispose();
 				}else {
-		            JOptionPane.showMessageDialog(null,"Sales status must be approval to edit the product status","Edit Product Status",JOptionPane.INFORMATION_MESSAGE);
+		            JOptionPane.showMessageDialog(null,"Sales status must be approved to edit the product status","Edit Product Status",JOptionPane.INFORMATION_MESSAGE);
 
 				}
 

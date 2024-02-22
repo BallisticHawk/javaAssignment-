@@ -74,8 +74,9 @@ public class ReportSelection extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String year = txtYear1.getText();
 				Sales obj1 = new Sales();
-				obj1.generateReport(year);
-				
+				String[] reportDetails = obj1.generateReport(year);
+				Report A = new Report(reportDetails);
+				A.setVisible(true);
 			}
 		});
 		btnMonthly.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -89,7 +90,10 @@ public class ReportSelection extends JFrame {
 		        String month = (String) cmb_month_year.getSelectedItem();
 				Sales obj1 = new Sales();
 
-				obj1.generateReport(month,year);
+				String[] reportDetails = obj1.generateReport(month,year);
+				
+				Report A = new Report(reportDetails);
+				A.setVisible(true);
 
 			}
 		});
@@ -103,6 +107,30 @@ public class ReportSelection extends JFrame {
 		txtYear1.setColumns(10);
 		txtYear1.setBounds(40, 116, 130, 19);
 		contentPane.add(txtYear1);
+		
+		JButton btnNewButton = new JButton("Back");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Account obj1 = new Account();
+				String[] info = obj1.viewProfile();
+				
+				//back to their respective dashboard based on their role.
+				if(info[4].equals("Admin")) {
+					
+					AdminDashboard A = new AdminDashboard();
+					A.setVisible(true);
+
+				}else if(info[4].equals("Officer")) {
+					OfficerDashboard A = new OfficerDashboard();
+					A.setVisible(true);
+
+				}
+				dispose();
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnNewButton.setBounds(51, 232, 85, 21);
+		contentPane.add(btnNewButton);
 		
 	}
 }

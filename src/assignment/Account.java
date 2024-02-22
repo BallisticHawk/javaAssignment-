@@ -123,7 +123,7 @@ public class Account extends FileClass {
 		}
 	}
 	//login authentication.
-	public String[] authenticateLogin(String providedEmail, String providedPassword) {
+	public String[] authenticate(String providedEmail, String providedPassword) {
 		List<String[]> accountList = loadData();
 		String[] array = new String[3];
 		//array index 1 is to store login status, index 2 is to store the message shown, index 3 is to store the user role
@@ -163,6 +163,16 @@ public class Account extends FileClass {
 	    array[1] = "Account with this email is not exists";
 		return array;
 	}
+	public Boolean authenticate(String password) {
+		String[] info = viewProfile();
+		if (password.equals(info[1])) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
 	
 	//view personal profile
 	public String[] viewProfile() {
