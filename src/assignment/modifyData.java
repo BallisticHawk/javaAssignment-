@@ -31,37 +31,22 @@ public class modifyData {
 				 		
 				 		//if edited data's order id match file data's orderID
 				 		if(data[0].equals(sale[0])) {
-				 			for(int i = 0; i < data.length;i++) {
-				 				sale[i] = data[i];
-				 				System.out.println(data[i]);
-				 			}
+			                System.arraycopy(data, 0, sale, 0, data.length); // Copy data to sale
 				 			break;
-				 	
 				 			
-				 			
-				 		}
-				 		
-				 		
+				 		}			 		
 				 	}
 		 			
 		 			
 		 		}
-		 		obj1.overwriteData(salesList);
+
+
+		 obj1.overwriteData(salesList);
 				
 				
 			
 	    }
 
-	 private static boolean checkForUIDMatch(String[] fileData, List<String[]> tableData) {
-		    System.out.print(fileData);System.out.print(tableData);
-		 String fileUID = fileData[2]; // Assuming the UID is located at index 2
-		    for (String[] rowData : tableData) {
-		        if (rowData[2].equals(fileUID)) {
-		            return true; // Match found
-		        }
-		    }
-		    return false; // No match found
-		}
 
 	
     public void deleteRow(DefaultTableModel model, int rowToDelete) {

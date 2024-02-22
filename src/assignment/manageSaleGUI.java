@@ -92,12 +92,12 @@ public class manageSaleGUI extends JFrame {
                         rowData[j] = String.valueOf(model.getValueAt(i, j));
                     }
                     tableData.add(rowData);
-                    System.out.println(Arrays.toString(rowData));
 
                 }
 
-                
+
                 modifyData.updateSalesData(tableData);
+                
              
                 JOptionPane.showMessageDialog(manageSaleGUI.this, "Data updated successfully!");
             }

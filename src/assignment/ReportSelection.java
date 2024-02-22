@@ -11,12 +11,15 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ReportSelection extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtYear;
+	private JTextField txtYear1;
 
 	/**
 	 * Launch the application.
@@ -46,16 +49,8 @@ public class ReportSelection extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnMonthly = new JButton("Monthly Report");
-		btnMonthly.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnMonthly.setBounds(40, 181, 164, 27);
-		contentPane.add(btnMonthly);
-		
-		JButton btnAnnualReport = new JButton("Annual Report");
-		btnAnnualReport.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnAnnualReport.setBounds(236, 181, 164, 27);
-		contentPane.add(btnAnnualReport);
-		
+
+
 		txtYear = new JTextField();
 		txtYear.setText("Year");
 		txtYear.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -63,20 +58,51 @@ public class ReportSelection extends JFrame {
 		contentPane.add(txtYear);
 		txtYear.setColumns(10);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Month", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"}));
-		comboBox.setBounds(40, 143, 130, 19);
-		contentPane.add(comboBox);
-		
 		JLabel lblNewLabel = new JLabel("Report Type");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel.setBounds(167, 10, 165, 37);
 		contentPane.add(lblNewLabel);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		comboBox_1.setBounds(236, 143, 130, 19);
-		contentPane.add(comboBox_1);
+		JComboBox cmb_month_year = new JComboBox();
+		cmb_month_year.setModel(new DefaultComboBoxModel(new String[] {"Month", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"}));
+		cmb_month_year.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		cmb_month_year.setBounds(236, 143, 130, 19);
+		contentPane.add(cmb_month_year);
+		
+		JButton btnMonthly = new JButton("Annual Report");
+		btnMonthly.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String year = txtYear1.getText();
+				Sales obj1 = new Sales();
+				obj1.generateReport(year);
+				
+			}
+		});
+		btnMonthly.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnMonthly.setBounds(40, 181, 164, 27);
+		contentPane.add(btnMonthly);
+		
+		JButton btnMonthlyReport = new JButton("MonthlyReport");
+		btnMonthlyReport.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String year = txtYear.getText();
+		        String month = (String) cmb_month_year.getSelectedItem();
+				Sales obj1 = new Sales();
+
+				obj1.generateReport(month,year);
+
+			}
+		});
+		btnMonthlyReport.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnMonthlyReport.setBounds(236, 181, 164, 27);
+		contentPane.add(btnMonthlyReport);
+		
+		txtYear1 = new JTextField();
+		txtYear1.setText("Year");
+		txtYear1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtYear1.setColumns(10);
+		txtYear1.setBounds(40, 116, 130, 19);
+		contentPane.add(txtYear1);
+		
 	}
 }
