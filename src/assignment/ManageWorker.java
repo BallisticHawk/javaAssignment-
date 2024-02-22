@@ -55,7 +55,7 @@ public class ManageWorker extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 704, 475);
+		setBounds(100, 100, 800, 617);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -107,7 +107,7 @@ public class ManageWorker extends JFrame {
 		contentPane.add(cmbID);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(25, 76, 576, 143);
+		scrollPane.setBounds(25, 76, 452, 426);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();

@@ -34,29 +34,10 @@ public class Officer extends Account implements ManageSales{
 		return salesList;
 	}	
 
-	@Override
-	//find particular order from the saleslist
-	public String[] searchSales(List<String[]> salesList,String ID) {
-		
-		List<String[]> list = viewSales(salesList);
-		
-		
-		for(String[] record : list) {
-			
-			//check if Order ID match with the input.
-			if(record[0].equals(ID)) {
 
-				return record;
-			}
-		}
-		
-		
-		
-		
-		return null;
-	}
-	public String[] generateInvoice(List<String[]> salesList,String ID) {
-		String[] invoiceDetails = searchSales(salesList,ID);
+	public String[] generateInvoice(String ID) {
+		Sales obj1 = new Sales();
+		String[] invoiceDetails = obj1.searchSales(ID);
 		
 		//calculate total price by using price * quantity
         double price = Integer.parseInt(invoiceDetails[3]);
@@ -69,29 +50,8 @@ public class Officer extends Account implements ManageSales{
 		return invoiceDetails;
 	}
 
-	public List<String[]> viewSales(List<String[]> salesList) {
-		// TODO Auto-generated method stub
-		
-		List<String[]> info = new ArrayList<String[]>();
-		
-		for(String[] sales : salesList) {
-			//convert int day,month,year to date
-			int year,month,day;
-			day = Integer.parseInt(sales[5]);
-			month = Integer.parseInt(sales[6]);
 
-			year = Integer.parseInt(sales[7]);
-	        LocalDate date = LocalDate.of(year,month,day);
-	        
-	        sales[5] = date.toString();
-	        
-	        info.add(sales); 
-	        
-		}
-		
-		
-		return info;
-	}
-	
+
+
 
 }

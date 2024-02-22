@@ -34,8 +34,9 @@ public class OfficerManageOrder extends JFrame {
 	private JComboBox cmbProduct;
 	private JButton btnSearch;
 	private JLabel lblOrders;
-	private JButton btnDelete_1;
+	private JButton btnViewReport;
 	private JButton btnEditProductStatus;
+	private JButton btnBack;
 
 	/**
 	 * Launch the application.
@@ -82,11 +83,8 @@ public class OfficerManageOrder extends JFrame {
                 	String OrderID = (String) cmbID.getSelectedItem();
 
                 	
-				 	Officer obj1 = new Officer();
-			        Sales obj2 = new Sales();
-			        List<String[]> salesInfo = obj2.loadData();
-			        
-			        String[] info = obj1.searchSales(salesInfo, OrderID);
+                	Sales obj1 = new Sales();
+			        String[] info = obj1.searchSales(OrderID);
 			        
 			        //select the current sale status of that orderID
 			        for (int i = 0; i < cmbSale.getItemCount(); i++) {
@@ -131,11 +129,9 @@ public class OfficerManageOrder extends JFrame {
 		));
 		
 		//load the sales info from textfile .
-        Officer obj1 = new Officer();
-        Sales obj2 = new Sales();
-        List<String[]> salesInfo = obj2.loadData();
-        
-        salesInfo = obj1.viewSales(salesInfo);
+        Sales obj1 = new Sales();
+ 
+        List<String[]> salesInfo = obj1.viewSales();
         DefaultTableModel tblModel = (DefaultTableModel) table.getModel();    
            
         // using loop to display all sales details in the table.
@@ -177,12 +173,9 @@ public class OfficerManageOrder extends JFrame {
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
                 String OrderID = (String) cmbID.getSelectedItem();
-            	Officer obj1 = new Officer();
-				Sales obj2 = new Sales();
-				
-				//load Data
-				List<String[]> salesList = obj2.loadData();
-                String[] searchedSales = obj1.searchSales(salesList,OrderID);
+            	Sales obj1 = new Sales();				
+	
+                String[] searchedSales = obj1.searchSales(OrderID);
                 
                 //use the array and pass it to another form
                 SearchSales A = new SearchSales(searchedSales);
@@ -198,9 +191,9 @@ public class OfficerManageOrder extends JFrame {
 		lblOrders.setBounds(10, 27, 140, 23);
 		contentPane.add(lblOrders);
 		
-		btnDelete_1 = new JButton("View Report");
-		btnDelete_1.setBounds(411, 285, 113, 23);
-		contentPane.add(btnDelete_1);
+		btnViewReport = new JButton("View Report");
+		btnViewReport.setBounds(411, 285, 113, 23);
+		contentPane.add(btnViewReport);
 		
 		JButton btnEditSaleStatus = new JButton("Edit");
 		btnEditSaleStatus.addActionListener(new ActionListener() {
@@ -232,23 +225,21 @@ public class OfficerManageOrder extends JFrame {
 		btnEditSaleStatus.setBounds(236, 354, 89, 23);
 		contentPane.add(btnEditSaleStatus);
 		
-		JButton btnDelete_1_1 = new JButton("Issue Invoice");
-		btnDelete_1_1.addActionListener(new ActionListener() {
+		JButton btnIssueInvoice = new JButton("Issue Invoice");
+		btnIssueInvoice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
                 String OrderID = (String) cmbID.getSelectedItem();
             	Officer obj1 = new Officer();
-				Sales obj2 = new Sales();
 				
-				//load Data and generate invoice details
-				List<String[]> salesList = obj2.loadData();
-                String[] InvoiceDetails = obj1.generateInvoice(salesList,OrderID);
+				//generate invoice details
+                String[] InvoiceDetails = obj1.generateInvoice(OrderID);
                 Invoice A = new Invoice(InvoiceDetails);
                 A.setVisible(true);
                 
 			}
 		});
-		btnDelete_1_1.setBounds(82, 427, 160, 23);
-		contentPane.add(btnDelete_1_1);
+		btnIssueInvoice.setBounds(82, 427, 160, 23);
+		contentPane.add(btnIssueInvoice);
 		
 		btnEditProductStatus = new JButton("Edit");
 		btnEditProductStatus.addActionListener(new ActionListener() {
@@ -287,5 +278,16 @@ public class OfficerManageOrder extends JFrame {
 		});
 		btnEditProductStatus.setBounds(236, 378, 89, 23);
 		contentPane.add(btnEditProductStatus);
+		
+		btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AdminDashboard A = new AdminDashboard();
+				A.setVisible(true);
+				dispose();
+			}
+		});
+		btnBack.setBounds(263, 286, 113, 23);
+		contentPane.add(btnBack);
 	}
 }

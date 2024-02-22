@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
@@ -16,41 +17,39 @@ import javax.swing.table.DefaultTableModel;
 public class modifyData {
 
 	 public static void updateSalesData(List<String[]> tableData) {
-	        try (BufferedReader reader = new BufferedReader(new FileReader("sales.txt"));
-	             PrintWriter writer = new PrintWriter(new FileWriter("sales_temp.txt"))) {
-	        	System.out.print(tableData);
-	            String[] fileData = new String[13];
-	            System.out.print(fileData);
-	            int linesRead = 0;
-	            String line;
+	        
+		 Sales obj1 = new Sales();
+		 List<String[]> salesList = obj1.loadData();
+		 	
 
-	            while ((line = reader.readLine()) != null) {
-	                fileData[linesRead % 13] = line.trim();
-	                linesRead++;
-	                if (linesRead % 13 == 0) {
-	                    boolean matchFound = checkForUIDMatch(fileData, tableData);
-	                    if (matchFound) {
-	                        for (String rowData : tableData.get(linesRead / 13 - 1)) {
-	                            writer.println(rowData);
-	                        }
-	                    } else {
-	                        for (String rowData : fileData) {
-	                            writer.println(rowData);
-	                        }
-	                    }
-	                    writer.println(); // Add an empty line after each row
-	                    fileData = new String[13];
-	                }
-	            }
-	        } catch (IOException ex) {
-	            ex.printStackTrace();
-	        }
-	        // Rename the temporary file to the original file
-	        try {
-	            Files.move(Paths.get("sales_temp.txt"), Paths.get("sales.txt"), StandardCopyOption.REPLACE_EXISTING);
-	        } catch (IOException ex) {
-	            ex.printStackTrace();
-	        }
+		 
+		 		//loop for edited data
+		 		for(String[] data: tableData) {
+		 			
+		 			//loop for the file data
+				 	for (String[] sale: salesList) {
+				 		
+				 		//if edited data's order id match file data's orderID
+				 		if(data[0].equals(sale[0])) {
+				 			for(int i = 0; i < data.length;i++) {
+				 				sale[i] = data[i];
+				 				System.out.println(data[i]);
+				 			}
+				 			break;
+				 	
+				 			
+				 			
+				 		}
+				 		
+				 		
+				 	}
+		 			
+		 			
+		 		}
+		 		obj1.overwriteData(salesList);
+				
+				
+			
 	    }
 
 	 private static boolean checkForUIDMatch(String[] fileData, List<String[]> tableData) {

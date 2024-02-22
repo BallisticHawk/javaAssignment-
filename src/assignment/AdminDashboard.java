@@ -59,7 +59,7 @@ public class AdminDashboard extends JFrame {
 			}
 		});
 		btnLogout.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnLogout.setBounds(78, 303, 111, 54);
+		btnLogout.setBounds(174, 338, 111, 54);
 		contentPane.add(btnLogout);
 		
 		JButton btnManageProfile = new JButton("Manage Profile");
@@ -85,5 +85,26 @@ public class AdminDashboard extends JFrame {
 		btnManageWorkerProfile.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnManageWorkerProfile.setBounds(78, 150, 195, 64);
 		contentPane.add(btnManageWorkerProfile);
+		
+		JButton btnGenerateReport = new JButton("Generate Report");
+		btnGenerateReport.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnGenerateReport.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnGenerateReport.setBounds(316, 150, 195, 64);
+		contentPane.add(btnGenerateReport);
+		
+		JButton btnManageProduct = new JButton("Manage Product");
+		btnManageProduct.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				adminManageProduct A = new adminManageProduct();
+				A.setVisible(true);
+				dispose();
+			}
+		});
+		btnManageProduct.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnManageProduct.setBounds(316, 67, 195, 64);
+		contentPane.add(btnManageProduct);
 	}
 }

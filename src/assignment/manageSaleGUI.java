@@ -7,13 +7,16 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public class manageSaleGUI extends JFrame {
 
     private JPanel contentPane;
     private JTable table;
     private modifyData editSalesData;
+    private final int[] nonEditableColumns = {3, 9, 10};
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -30,7 +33,7 @@ public class manageSaleGUI extends JFrame {
 
     public manageSaleGUI() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 1115, 490);
+        setBounds(100, 100, 1115, 630);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -45,8 +48,10 @@ public class manageSaleGUI extends JFrame {
         table.setCellSelectionEnabled(true);
         scrollPane.setViewportView(table);
 
-        dataReader obj2 = new dataReader();
-        DefaultTableModel model = obj2.displaySales();
+        //load personal sales
+        Salesperson obj2 = new Salesperson();
+        
+        DefaultTableModel model = obj2.viewPersonalSales(Account.UID);
         table.setModel(model);
 
         JLabel lblNewLabel = new JLabel("Sales List");
@@ -55,9 +60,27 @@ public class manageSaleGUI extends JFrame {
         contentPane.add(lblNewLabel);
 
         JButton btnBack = new JButton("Go Back ");
+        btnBack.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		SalepersonDashboard A = new SalepersonDashboard();
+        		A.setVisible(true);
+        		dispose();
+                
+        	}
+        });
         btnBack.setBounds(37, 406, 89, 23);
         contentPane.add(btnBack);
         
+        JComboBox cmbID = new JComboBox();
+        cmbID.setBounds(150, 450, 96, 20);
+        contentPane.add(cmbID);
+        for (int i = 0; i < model.getRowCount(); i++) {
+            // Get the value from the first column of the current row
+            Object value = model.getValueAt(i, 0); // Assuming the first column index is 0
+            
+            // Add the value to the combo box
+            cmbID.addItem(value);
+        }
         JButton btnUpdate = new JButton("Update");
         btnUpdate.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -69,8 +92,13 @@ public class manageSaleGUI extends JFrame {
                         rowData[j] = String.valueOf(model.getValueAt(i, j));
                     }
                     tableData.add(rowData);
+                    System.out.println(Arrays.toString(rowData));
+
                 }
+
+                
                 modifyData.updateSalesData(tableData);
+             
                 JOptionPane.showMessageDialog(manageSaleGUI.this, "Data updated successfully!");
             }
         });
@@ -78,33 +106,50 @@ public class manageSaleGUI extends JFrame {
         btnUpdate.setBounds(140, 406, 89, 23);
         contentPane.add(btnUpdate);
         
-        JButton btnDelete = new JButton("Delete Row");
-        btnDelete.setBounds(339, 406, 99, 23);
+        JButton btnDelete = new JButton("Refresh");
+        btnDelete.setBounds(253, 406, 99, 23);
         contentPane.add(btnDelete);
         
         btnDelete.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                modifyData editSalesData = new modifyData(); // Initialize modifyData object
-                int selectedRow = table.getSelectedRow();
-                if (selectedRow != -1) {
-                    // Delete the row
-                    editSalesData.deleteRow((DefaultTableModel)table.getModel(), selectedRow);
-                    JOptionPane.showMessageDialog(manageSaleGUI.this, "Row deleted successfully!");
-                } else {
-                    JOptionPane.showMessageDialog(manageSaleGUI.this, "Please select a row to delete!");
-                }
+            	manageSaleGUI A = new manageSaleGUI();
+            	A.setVisible(true);
+            	dispose();
             }
         });
         
-        JButton btnAddRow = new JButton("Add Row");
-        btnAddRow.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                DefaultTableModel model = (DefaultTableModel) table.getModel();
-                model.addRow(new Object[model.getColumnCount()]);
-            }
+        JButton btnAdd = new JButton("Add Sales");
+        btnAdd.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		AddSales A = new AddSales();
+        		A.setVisible(true);
+                
+        		
+        	}
         });
-        btnAddRow.setBounds(240, 406, 89, 23);
-        contentPane.add(btnAddRow);
+        btnAdd.setBounds(378, 406, 99, 23);
+        contentPane.add(btnAdd);
+
+        JLabel lblNewLabel_1 = new JLabel("OrderID");
+        lblNewLabel_1.setBounds(37, 450, 103, 14);
+        contentPane.add(lblNewLabel_1);
+        
+        JButton btnSearch = new JButton("Search");
+        btnSearch.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+                String OrderID = (String) cmbID.getSelectedItem();
+            	Sales obj1 = new Sales();				
+	
+                String[] searchedSales = obj1.searchSales(OrderID);
+                
+                //use the array and pass it to another form
+                SalespersonSearchSales A = new SalespersonSearchSales(searchedSales);
+                A.setVisible(true);
+        		
+        	}
+        });
+        btnSearch.setBounds(263, 449, 89, 21);
+        contentPane.add(btnSearch);
     
     }
 }

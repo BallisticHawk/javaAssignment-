@@ -37,7 +37,7 @@ public class OfficerDashboard extends JFrame {
 	 */
 	public OfficerDashboard() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 525, 312);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -58,7 +58,7 @@ public class OfficerDashboard extends JFrame {
 			}
 		});
 		btnLogout.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnLogout.setBounds(56, 199, 111, 54);
+		btnLogout.setBounds(208, 211, 111, 54);
 		contentPane.add(btnLogout);
 		
 		JButton btnManageProfile = new JButton("Manage Profile");
@@ -72,6 +72,27 @@ public class OfficerDashboard extends JFrame {
 		btnManageProfile.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnManageProfile.setBounds(42, 59, 195, 64);
 		contentPane.add(btnManageProfile);
+		
+		JButton btnProcessSales = new JButton("Manage Sales");
+		btnProcessSales.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				OfficerManageOrder A = new OfficerManageOrder();
+				A.setVisible(true);
+				dispose();
+			}
+		});
+		btnProcessSales.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnProcessSales.setBounds(247, 59, 195, 64);
+		contentPane.add(btnProcessSales);
+		
+		JButton btnGenerateReport = new JButton("Generate Report");
+		btnGenerateReport.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnGenerateReport.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnGenerateReport.setBounds(42, 133, 195, 64);
+		contentPane.add(btnGenerateReport);
 	}
 
 }

@@ -67,7 +67,14 @@ public class adminManageProduct extends JFrame {
         DefaultTableModel model = obj2.displayProduct();
         table.setModel(model);
         
-        JButton btnBack = new JButton("Go Back ");
+        JButton btnBack = new JButton("Back ");
+        btnBack.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		AdminDashboard A = new AdminDashboard();
+        		A.setVisible(true);
+        		dispose();
+        	}
+        });
         btnBack.setBounds(37, 406, 89, 23);
         contentPane.add(btnBack);
         
@@ -95,6 +102,10 @@ public class adminManageProduct extends JFrame {
         contentPane.add(btnDelete);
         
         JButton btnAddProduct = new JButton("Add Product");
+        btnAddProduct.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         btnAddProduct.setBounds(348, 406, 114, 23);
         contentPane.add(btnAddProduct);
         

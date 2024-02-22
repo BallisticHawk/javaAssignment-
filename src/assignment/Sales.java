@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -42,7 +43,7 @@ public class Sales extends FileClass{
 	//insert new sales record
 	@Override
 	public String insertData() {
-		String message = "hi";
+		String message;
 		try {
 			FileWriter fw = new FileWriter(filename,true);
 			PrintWriter outputFile = new PrintWriter(fw);
@@ -70,6 +71,27 @@ public class Sales extends FileClass{
 		}
 	return message;
 	}
+	
+	public String insertData(String[] rowData) {
+		String message;
+		try {
+			FileWriter fw = new FileWriter(filename,true);
+			PrintWriter outputFile = new PrintWriter(fw);
+
+			for(String data : rowData) {
+	        	outputFile.println(data);
+	        }
+
+
+			message = "Sales have been added";
+			outputFile.close();
+		}catch (IOException e) {
+			message = "Unable to open file.";
+			return message;
+		}
+	return message;
+	}
+	
 
 
 	@Override
@@ -129,5 +151,54 @@ public class Sales extends FileClass{
 			return message;
 		}
 	}
+	
+	public List<String[]> viewSales() {
+		// TODO Auto-generated method stub
+		Sales obj1 = new Sales();
+		List<String[]> salesList = obj1.loadData();
+		
+		List<String[]> info = new ArrayList<String[]>();
+		
+		for(String[] sales : salesList) {
+			//convert int day,month,year to date
+			int year,month,day;
+			day = Integer.parseInt(sales[5]);
+			month = Integer.parseInt(sales[6]);
+
+			year = Integer.parseInt(sales[7]);
+	        LocalDate date = LocalDate.of(year,month,day);
+	        
+	        sales[5] = date.toString();
+	        
+	        info.add(sales); 
+	        
+		}
+		
+		
+		return info;
+	}
+	
+	//find particular order from the saleslist
+	public String[] searchSales(String ID) {
+		
+		
+		List<String[]> list = viewSales();
+		
+		
+		for(String[] record : list) {
+			
+			//check if Order ID match with the input.
+			if(record[0].equals(ID)) {
+
+				return record;
+			}
+		}
+		
+		
+		
+		
+		return null;
+	}
+	
 	
 }
