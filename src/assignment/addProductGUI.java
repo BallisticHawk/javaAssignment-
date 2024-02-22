@@ -181,8 +181,7 @@ public class addProductGUI extends JFrame {
 				String Height = height.getText();
 				String Width = width.getText();
 				
-				Validation validator = new Validation();
-				boolean Name_b = validator.validate(Name,"name");
+				boolean Name_b = Validation.validate(Name,"name");
 				if (Name_b == true) {
 					addProduct obj1 = new addProduct (ItemId, Name, Category, Price, SellableOnline, ShowDescription,Designer, Depth, Height, Width);
 					String result = obj1.writeProduct(ItemId, Name, Category, Price, SellableOnline, ShowDescription, Designer, Depth, Height, Width);
